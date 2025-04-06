@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useMovieSearch, useMovieDetail } from '@/hooks/useMovie'
 import { useMovieStore } from '@/stores/movie'
-import mockMovies from '@/tests/movies.json'
+import mockMovies, { searchTitle } from '@mocks/movies.mock'
 import type { ReactNode } from 'react'
 
 vi.mock('@/stores/movie', () => ({
@@ -32,7 +32,7 @@ describe('useMovie hook', () => {
 
   describe('useMovieSearch', () => {
     beforeEach(() => {
-      vi.mocked(useMovieStore).mockReturnValue('avengers')
+      vi.mocked(useMovieStore).mockReturnValue(searchTitle)
     })
 
     test('영화 검색 결과를 반환해야 합니다', async () => {

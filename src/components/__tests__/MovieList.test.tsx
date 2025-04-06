@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router'
 import MovieList, { emptyMessage } from '@/components/MovieList'
-import mockMovies from '@/tests/movies.json'
+import mockMovies from '@mocks/movies.mock'
 
 describe('MovieList', () => {
   test('영화 목록이 없으면, 메시지를 렌더링해야 합니다', () => {
