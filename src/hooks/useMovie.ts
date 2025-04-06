@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMovieStore } from '@/stores/movie'
-import type { Movies, Movie, MovieDetails } from '@/stores/movie'
+import type { Movies, MovieDetails } from '@/stores/movie'
 
 export function useMovieSearch() {
   const title = useMovieStore(state => state.searchTitle)
