@@ -32,10 +32,12 @@ export default function MovieSearch({
         value={searchTitle}
         onChange={e => setSearchTitle(e.target.value)}
         onKeyDown={handleKeyDown}
+        data-testid="movie-search-input"
       />
       <button
         className="rounded-md bg-blue-500 px-4 py-2 text-white"
-        onClick={onSubmit}>
+        onClick={onSubmit}
+        data-testid="movie-search-button">
         검색
       </button>
     </div>

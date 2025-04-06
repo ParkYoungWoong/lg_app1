@@ -3,14 +3,14 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useMovieSearch, useMovieDetail } from '@/hooks/useMovie'
 import { useMovieStore } from '@/stores/movie'
-import mockMovies from '@/tests/movies.json'
+import mockMovies from '@mocks/movies.mock'
+import mockMovie from '@mocks/movie.mock'
 import type { ReactNode } from 'react'
 
 vi.mock('@/stores/movie', () => ({
   useMovieStore: vi.fn()
 }))
 
-const mockMovie = mockMovies[0]
 const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -66,7 +66,7 @@ describe('useMovie hook', () => {
         json: () => Promise.resolve(mockMovie)
       } as Response)
 
-      const { result } = renderHook(() => useMovieDetail('tt0848228'), {
+      const { result } = renderHook(() => useMovieDetail('tt4154796'), {
         wrapper: createWrapper()
       })
       await waitFor(() => {

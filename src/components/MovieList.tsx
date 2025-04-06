@@ -9,7 +9,9 @@ export default function MovieList({ movies }: { movies: Movies }) {
       {movies.length ? (
         <ul className="mt-2">
           {movies.map(movie => (
-            <li key={movie.imdbID}>
+            <li
+              key={movie.imdbID}
+              data-testid="movie-item">
               <Link
                 to={`/movies/${movie.imdbID}`}
                 className="block cursor-pointer rounded-md p-1 hover:bg-gray-100">
@@ -19,7 +21,7 @@ export default function MovieList({ movies }: { movies: Movies }) {
           ))}
         </ul>
       ) : (
-        <p>{emptyMessage}</p>
+        <p data-testid="no-results">{emptyMessage}</p>
       )}
     </>
   )

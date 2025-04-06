@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMovieStore } from '@/stores/movie'
-import type { Movie, Movies } from '@/stores/movie'
+import type { Movies, Movie, MovieDetails } from '@/stores/movie'
 
 export function useMovieSearch() {
   const title = useMovieStore(state => state.searchTitle)
@@ -17,7 +17,7 @@ export function useMovieSearch() {
 }
 
 export function useMovieDetail(id?: string) {
-  return useQuery<Movie | null>({
+  return useQuery<MovieDetails | null>({
     queryKey: ['movie', id],
     queryFn: async () => {
       const res = await fetch(`https://omdbapi.com/?apikey=7035c60c&i=${id}`)
