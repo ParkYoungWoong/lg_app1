@@ -1,6 +1,7 @@
 import MovieSearch from '@/components/MovieSearch'
 import MovieList from '@/components/MovieList'
 import { useMovieStore } from '@/stores/movie'
+import { useMovieSearch } from '@/hooks/useMovie'
 
 export default function MoviesPage() {
   return (
@@ -12,19 +13,19 @@ export default function MoviesPage() {
 }
 
 function MovieSearchContainer() {
-  const searchTitle = useMovieStore(state => state.searchTitle)
+  const inputText = useMovieStore(state => state.inputText)
+  const setInputText = useMovieStore(state => state.setInputText)
   const setSearchTitle = useMovieStore(state => state.setSearchTitle)
-  const fetchMovies = useMovieStore(state => state.fetchMovies)
 
   return (
     <MovieSearch
-      value={searchTitle}
-      onChange={setSearchTitle}
-      onSubmit={fetchMovies}
+      value={inputText}
+      onChange={setInputText}
+      onSubmit={() => setSearchTitle(inputText)}
     />
   )
 }
 function MovieListContainer() {
-  const movies = useMovieStore(state => state.movies)
+  const { data: movies = [] } = useMovieSearch()
   return <MovieList movies={movies} />
 }

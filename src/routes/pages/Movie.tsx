@@ -1,24 +1,10 @@
 import { useParams } from 'react-router'
-import { useEffect, useState } from 'react'
-import { useMovieStore } from '@/stores/movie'
+import { useMovieDetail } from '@/hooks/useMovie'
 import Loader from '@/components/Loader'
 
 export default function MoviePage() {
   const { id } = useParams()
-  const movie = useMovieStore(state => state.movie)
-  const fetchMovie = useMovieStore(state => state.fetchMovie)
-  const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    init()
-  }, [id])
-
-  async function init() {
-    if (!id) return
-    setIsLoading(true)
-    await fetchMovie(id)
-    setIsLoading(false)
-  }
+  const { data: movie, isLoading } = useMovieDetail(id)
 
   return (
     <div className="container mx-auto px-3 py-5">
@@ -26,18 +12,20 @@ export default function MoviePage() {
         <div className="flex justify-center">
           <Loader />
         </div>
+      ) : movie ? (
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-bold">{movie.Title}</h1>
+          <p className="text-gray-700">{movie.Plot}</p>
+          <img
+            src={movie.Poster.replace('SX300', 'SX700')}
+            alt={movie.Title}
+            className="w-1/2 rounded-md"
+          />
+        </div>
       ) : (
-        movie && (
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold">{movie.Title}</h1>
-            <p className="text-gray-700">{movie.Plot}</p>
-            <img
-              src={movie.Poster.replace('SX300', 'SX700')}
-              alt={movie.Title}
-              className="w-1/2 rounded-md"
-            />
-          </div>
-        )
+        <div className="flex justify-center">
+          <p className="text-gray-700">영화를 찾을 수 없습니다.</p>
+        </div>
       )}
     </div>
   )

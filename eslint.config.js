@@ -10,7 +10,8 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      'plugin:prettier/recommended'
+      'plugin:prettier/recommended',
+      'plugin:@tanstack/eslint-plugin-query/recommended'
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
