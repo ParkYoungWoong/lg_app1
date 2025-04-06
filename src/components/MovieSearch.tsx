@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+export const searchPlaceholder = '영화 제목을 검색하세요!'
+
 export default function MovieSearch({
   value,
   onChange,
@@ -25,7 +27,7 @@ export default function MovieSearch({
     <div className="flex gap-2">
       <input
         className="grow rounded-md border-2 border-gray-300 p-2"
-        placeholder="영화 제목을 검색하세요!"
+        placeholder={searchPlaceholder}
         name="search"
         value={searchTitle}
         onChange={e => setSearchTitle(e.target.value)}

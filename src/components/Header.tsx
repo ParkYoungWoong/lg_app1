@@ -9,7 +9,7 @@ const linkVariants = cva('', {
     isActive: false
   }
 })
-const links = [
+export const links = [
   { to: '/', label: 'Home' },
   { to: '/movies', label: 'Movies' }
 ]

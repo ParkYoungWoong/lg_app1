@@ -2,9 +2,10 @@ import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 
 export interface Movie {
-  imdbID: string
   Title: string
-  Plot: string
+  Year: string
+  imdbID: string
+  Type: string
   Poster: string
 }
 export type Movies = Movie[]
