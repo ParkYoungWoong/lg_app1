@@ -1,7 +1,6 @@
 import { Link } from 'react-router'
-import type { Movies } from '@/stores/movie'
 
-export default function MovieList({ movies }: { movies: Movies }) {
+export default function MovieList({ movies }) {
   return (
     <ul className="mt-2">
       {movies.map(movie => (

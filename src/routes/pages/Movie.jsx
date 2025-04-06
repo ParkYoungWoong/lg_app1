@@ -2,6 +2,7 @@ import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useMovieStore } from '@/stores/movie'
 import Loader from '@/components/Loader'
+
 export default function MoviePage() {
   const { id } = useParams()
   const movie = useMovieStore(state => state.movie)

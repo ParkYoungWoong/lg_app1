@@ -1,21 +1,13 @@
 import { useState, useEffect } from 'react'
 
-export default function MovieSearch({
-  value,
-  onChange,
-  onSubmit
-}: {
-  value: string
-  onChange: (value: string) => void
-  onSubmit: () => void
-}) {
+export default function MovieSearch({ value, onChange, onSubmit }) {
   const [searchTitle, setSearchTitle] = useState(value)
 
   useEffect(() => {
     onChange(searchTitle)
   }, [searchTitle])
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown() {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       onSubmit()
     }
