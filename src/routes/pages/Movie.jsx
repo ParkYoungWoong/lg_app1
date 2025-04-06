@@ -26,18 +26,20 @@ export default function MoviePage() {
         <div className="flex justify-center">
           <Loader />
         </div>
+      ) : movie ? (
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-bold">{movie.Title}</h1>
+          <p className="text-gray-700">{movie.Plot}</p>
+          <img
+            src={movie.Poster.replace('SX300', 'SX700')}
+            alt={movie.Title}
+            className="w-1/2 rounded-md"
+          />
+        </div>
       ) : (
-        movie && (
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold">{movie.Title}</h1>
-            <p className="text-gray-700">{movie.Plot}</p>
-            <img
-              src={movie.Poster.replace('SX300', 'SX700')}
-              alt={movie.Title}
-              className="w-1/2 rounded-md"
-            />
-          </div>
-        )
+        <div className="flex justify-center">
+          <p className="text-gray-700">영화를 찾을 수 없습니다.</p>
+        </div>
       )}
     </div>
   )
