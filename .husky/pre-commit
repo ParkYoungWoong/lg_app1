@@ -1,0 +1,5 @@
+#!/bin/sh
+npx prettier --check .
+npx eslint .
+npm run test:unit:coverage
+npx playwright test --reporter=list
