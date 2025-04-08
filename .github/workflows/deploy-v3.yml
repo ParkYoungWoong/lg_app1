@@ -1,4 +1,4 @@
-name: Deploy-v1
+name: Deploy-v3
 on:
   workflow_run:
     workflows: ['E2E Tests']
@@ -21,6 +21,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git fetch origin
-          git checkout origin/deploy
+          git switch origin/deploy
           git merge origin/main --ff-only
           git push origin deploy --force
