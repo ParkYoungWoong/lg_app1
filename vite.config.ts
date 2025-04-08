@@ -17,6 +17,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['setupTests.tsx'],
+    include: ['src/**/__tests__/**/*.[jt]s?(x)'],
     coverage: {
       provider: 'v8',
       exclude: [

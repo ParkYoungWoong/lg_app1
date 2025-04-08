@@ -18,11 +18,15 @@ jobs:
       - name: 의존성 설치
         run: npm ci
       - name: 단위 테스트 및 커버리지 검사 실행
-        run: npm run test:unit:coverage
+        id: coverage
+        run: |
+          output=$(npm run test:unit:coverage)
+          echo "$output"
+          coverage=$(echo "$output" | grep "All files" | awk '{print $4}' | sed 's/%//')
+          echo "coverage=$coverage" >> $GITHUB_OUTPUT
       - name: 커버리지 임계값 확인
         run: |
-          COVERAGE=$(npm run test:unit:coverage | grep "All files" | awk '{print $4}' | sed 's/%//')
-          if [ "$COVERAGE" -lt $MIN_COVERAGE ]; then
-            echo "Test coverage is below $MIN_COVERAGE% (Current: $COVERAGE%)"
+          if [ "${{ steps.coverage.outputs.coverage }}" -lt $MIN_COVERAGE ]; then
+            echo "테스트 커버리지가 $MIN_COVERAGE% 미만입니다. (현재: ${{ steps.coverage.outputs.coverage }}%)"
             exit 1
           fi
