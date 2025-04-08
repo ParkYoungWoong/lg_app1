@@ -1,0 +1,28 @@
+name: Unit Tests & Coverage
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  MIN_COVERAGE: 80
+jobs:
+  unit-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: 의존성 설치
+        run: npm ci
+      - name: 단위 테스트 및 커버리지 검사 실행
+        run: npm run test:unit:coverage
+      - name: 커버리지 임계값 확인
+        run: |
+          COVERAGE=$(npm run test:unit:coverage | grep "All files" | awk '{print $4}' | sed 's/%//')
+          if [ "$COVERAGE" -lt $MIN_COVERAGE ]; then
+            echo "Test coverage is below $MIN_COVERAGE% (Current: $COVERAGE%)"
+            exit 1
+          fi
