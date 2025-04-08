@@ -1,11 +1,13 @@
-name: Playwright Tests
+name: E2E Tests
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_run:
+    workflows: ['Unit Tests']
+    types:
+      - completed
     branches: [main]
 jobs:
   e2e-test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
