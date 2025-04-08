@@ -13,8 +13,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy 브랜치로 머지
         run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git fetch origin
           git checkout -b deploy origin/deploy || git checkout -b deploy
           git merge origin/main --ff-only
