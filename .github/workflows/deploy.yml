@@ -22,6 +22,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git fetch origin
-          git switch -c deploy origin/deploy || git switch -c deploy
+          git switch origin/deploy
           git merge origin/main --ff-only
           git push origin deploy --force
