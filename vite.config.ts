@@ -21,6 +21,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       exclude: [
+        'tests/**',
         '**/*.d.ts',
         '**/*.config.[jt]s',
         'src/main.tsx',

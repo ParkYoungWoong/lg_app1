@@ -2,4 +2,4 @@
 npx prettier --check .
 npx eslint .
 npm run test:unit:coverage
-npm run test:e2e
+npx playwright test --reporter=list
