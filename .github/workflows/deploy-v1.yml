@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy-v1
 on:
   workflow_run:
     workflows: ['E2E Tests']
