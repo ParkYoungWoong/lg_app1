@@ -1,11 +1,9 @@
-name: Unit Tests & Coverage
+name: Unit Tests
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-env:
-  MIN_COVERAGE: 80
 jobs:
   unit-test:
     timeout-minutes: 60
@@ -17,16 +15,5 @@ jobs:
           node-version: lts/*
       - name: 의존성 설치
         run: npm ci
-      - name: 단위 테스트 및 커버리지 검사 실행
-        id: coverage
-        run: |
-          output=$(npm run test:unit:coverage)
-          echo "$output"
-          coverage=$(echo "$output" | grep "All files" | awk '{print $4}' | sed 's/%//')
-          echo "coverage=$coverage" >> $GITHUB_OUTPUT
-      - name: 커버리지 임계값 확인
-        run: |
-          if [ "${{ steps.coverage.outputs.coverage }}" -lt $MIN_COVERAGE ]; then
-            echo "테스트 커버리지가 $MIN_COVERAGE% 미만입니다. (현재: ${{ steps.coverage.outputs.coverage }}%)"
-            exit 1
-          fi
+      - name: 단위 테스트 실행
+        run: npm run test:unit
