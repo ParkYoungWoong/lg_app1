@@ -16,4 +16,4 @@ jobs:
       - name: 의존성 설치
         run: npm ci
       - name: 단위 테스트 실행
-        run: npm run test:unit
+        run: npm run test:unit:coverage

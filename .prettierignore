@@ -1,0 +1,9 @@
+# Build output
+dist
+
+# Coverage directory
+coverage
+coverage/**
+
+# Node modules
+node_modules 
