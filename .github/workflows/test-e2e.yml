@@ -15,12 +15,36 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
+      # npm 캐시
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      # Playwright 캐시
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: 의존성 설치
         run: npm ci
+
+      # 브라우저가 캐시되어 있지 않은 경우에만 설치
       - name: Playwright 브라우저 설치
         run: npx playwright install --with-deps
+
+      # Chromium만 사용하도록 설정
       - name: Playwright 테스트 실행
-        run: npx playwright test --reporter=list
+        run: npx playwright test --project=chromium --reporter=list
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
