@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Deploy 브랜치로 머지
         run: |
-          git switch deploy
-          git merge main --ff-only
+          git fetch origin
+          git checkout -b deploy origin/deploy || git checkout -b deploy
+          git merge origin/main --ff-only
           git push origin deploy --force
