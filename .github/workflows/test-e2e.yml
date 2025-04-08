@@ -20,7 +20,7 @@ jobs:
       - name: Playwright 브라우저 설치
         run: npx playwright install --with-deps
       - name: Playwright 테스트 실행
-        run: npx playwright test
+        run: npx playwright test --reporter=list
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
