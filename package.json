@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docker:act": "act --artifact-server-path /tmp/artifacts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.71.10",
@@ -57,5 +58,6 @@
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
     "vitest": "^3.1.1"
-  }
+  },
+  "packageManager": "pnpm@10.7.0+sha512.6b865ad4b62a1d9842b61d674a393903b871d9244954f652b8842c2b553c72176b278f64c463e52d40fff8aba385c235c8c9ecf5cc7de4fd78b8bb6d49633ab6"
 }
