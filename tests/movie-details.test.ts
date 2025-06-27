@@ -27,7 +27,8 @@ test.describe('영화 상세 정보', () => {
   }) => {
     await page.goto('/movies/invalid-movie-id')
     await expect(page.getByTestId('movie-not-found')).toHaveText(
-      '영화를 찾을 수 없습니다.'
+      // '영화를 찾을 수 없습니다.'
+      '존재하지 않는 영화입니다.'
     )
   })
 })
