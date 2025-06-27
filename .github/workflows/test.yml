@@ -64,3 +64,31 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  # 실패 알림
+  notify-slack:
+    needs: [unit-test, e2e-test]
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: 슬랙 알림 (테스트 실패)
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,commit,author,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # 성공 알림
+  notify-slack-success:
+    needs: [unit-test, e2e-test]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: 슬랙 알림 (테스트 성공)
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          fields: repo,commit,author,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
