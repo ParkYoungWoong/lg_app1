@@ -90,9 +90,6 @@ jobs:
         with:
           status: success
           fields: repo,commit,author,ref,workflow,job,took
-          custom_payload: |
-            {
-              "text": ":tada: 모든 테스트가 성공했습니다!"
-            }
+          text: '테스트 성공~😘'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
